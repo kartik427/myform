@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>feedback</title>
+    <style>
+        .box {
+            background-color: lightgrey;
+            width: 500px;
+            border: 15px solid tomato;
+            padding: 50px;
+
+        }
+
+        form * {
+            margin-top: 10px;
+            padding: 5px;
+            font-size: 18px;
+        }
+
+        .box1 {
+            background-color: lightgrey;
+            width: 300px;
+            border: 10px solid tomato;
+            padding: 10px;
+
+        }
+
+        .left,
+        .right {
+            float: left;
+
+            padding: 2% 5%;
+            overflow: auto;
+        }
+
+        .left {
+
+            border-right: 2px solid grey;
+        }
+
+        form {
+            display: grid;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            overflow: auto;
+            font-size: 18px;
+            font-family: Merriweather;
+        }
+
+        form input {
+
+            border: 1px solid grey;
+            width: fit-content;
+        }
+
+
+
+        .right {
+            box-shadow: 0 0 70px -40px inset #ffdfdf;
+            min-height: 90vh;
+            margin: 35px;
+            width: 500px;
+
+        }
+
+        .fade {
+            opacity: 0;
+        }
+
+        .pack .head {
+            color: black;
+            /* padding: 10px 20px; */
+            font-size: 20px;
+            overflow: clip;
+
+            border-top-left-radius: inherit;
+            border-top-right-radius: inherit;
+
+            word-spacing: 1px;
+        }
+
+        .pack .content {
+            padding: 10px 10px 10px;
+        }
+
+        body {
+            background-image: url("https://cdn.crello.com/api/media/small/457664440/stock-photo-abstrack-colour-background-can-use");
+            background-repeat: repeat;
+            background-size: 1000px 1000px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="form-outer left">
+        <div class="head">
+            <h1 style="font-size:40px; text-align: center;background-color: salmon ;">Feedback Form</h1>
+
+        </div>
+        <div class="box">
+            <div class="form-inner">
+                <form id="myfeedback" autocomplete="off">
+
+                    <label>First Name</label>
+                    <fieldset style="border:none;">
+
+                        <input type="text" name="firstName" id="fname" maxlength="10" placeholder="write here...">
+                    </fieldset>
+                    <label>Last Name</label>
+                    <input type="text" name="lastName" id="lname" maxlength="10" placeholder="write here...">
+                    <label>Gender</label>
+                    <select id="sal">
+                        <option>Select</option>
+                        <option>male</option>
+                        <option>female</option>
+
+                    </select>
+                    <label>Your comments:</label>
+                    <textarea maxlength="500" id="com" class="text" rows="3" placeholder="write here..."></textarea>
+                    <input type="button" value="Submit" id="button">
+                    <input type="button" value="Reset" onClick="fun()" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+
+        <div class="heading"
+            style="font-size: 30px;background-color: SpringGreen; font-weight: bold;text-align: center; margin-bottom: 30px">
+            Top comments
+        </div>
+
+        <div class="pack">
+
+        </div>
+    </div>
+
+    <br>
+    <footer>
+        <b>
+            <p style="text-align:center;font-size: 120%;">This Page is created by Kartik geete, student of
+                MANIT,Bhopal</p>
+            <p style="text-align:center;font-size: 120%;"> Mob. No. - 86319540238 </p>
+            <p style="text-align:center;font-size: 120%;"> Mail - <a
+                    href="mailto: kartikgeete1024@gmail.com">kartikgeete1024@gmail.com</a></p>
+            <p style="text-align:center;font-size: 120%;">Copyright © 2021-2022 Kartik Geete</p>
+        </b>
+
+    </footer>
+    </div>
+    <script>
+        function fun() {
+            document.getElementById("myfeedback").reset();
+        }
+        var x = document.querySelector('#button');
+        x.addEventListener('click', vall);
+        function vall() {
+            console.log('called.');
+
+            var sal = document.getElementById('sal');
+            if (sal.value == 'Select') {
+                alert('Please select salutation');
+                return;
+            }
+            var fname = document.getElementById('fname');
+
+            if (hasNumber(fname.value)) {
+                alert('First is invalid');
+                return;
+            }
+            var lname = document.getElementById('lname');
+            if (hasNumber(lname.value)) {
+                alert(' Last Name is invalid');
+                return;
+            }
+            var com = document.getElementById('com');
+            if (!sal.value.length || !fname.value.length || !lname.value.length || !com.value.length) {
+                alert(' please fill it all the fields ');
+                return;
+            }
+            mainfun(sal, fname, lname, com);
+        }
+        function mainfun(sal, fname, lname, com) {
+            var n = document.createElement('div');
+            n.className = 'pack';
+            var name1 = document.createElement('div');
+            var nam2 = document.createElement('div');
+            name1.className = 'head';
+            if (sal.value == 'male')
+                name1.innerHTML = 'Mr.' + ' ' + fname.value + ' ' + lname.value + ' says';
+            else
+                name1.innerHTML = 'Mrs.' + ' ' + fname.value + ' ' + lname.value + ' says';
+            // name1.innerHTML = sal.value + ' ' + fname.value + ' ' + lname.value+ ' says...';
+            nam2.className = 'content';
+            nam2.innerHTML = com.value;
+            n.appendChild(name1);
+            n.appendChild(nam2);
+            document.querySelector('.heading').after(n);
+            n.classList.add('fade');
+            if (document.getElementsByClassName('pack').length == 9) {
+                document.getElementsByClassName('pack')[8].remove();
+            }
+            setTimeout(() => n.classList.remove('fade'), 700);
+        }
+        function hasNumber(strr) {
+            return /\d/.test(strr);
+        }
+    </script>
+</body>
+
+</html>
